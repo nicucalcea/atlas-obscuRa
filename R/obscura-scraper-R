@@ -58,12 +58,6 @@ scrape_all_places <- function(base_url, start_page = 1) {
 
         # Add places to our collection
         all_places <- c(all_places, places)
-        cat(sprintf(
-            "Found %d places on page %d (total so far: %d)\n",
-            length(places),
-            current_page,
-            length(all_places)
-        ))
 
         # Move to next page
         current_page <- current_page + 1
@@ -98,6 +92,11 @@ get_place_details <- function(place_url) {
         html_text() |>
         str_trim()
 
+    place_description <- place |>
+        html_element("h2") |>
+        html_text() |>
+        str_trim()
+
     place_coordinates <- place |>
         html_node(
             '[data-clipboard-name-value="Coordinates"] [data-clipboard-target="source"]'
@@ -111,6 +110,7 @@ get_place_details <- function(place_url) {
 
     tibble(
         name = place_name,
+        description = place_description,
         url = place_url_full,
         latitude = latitude,
         longitude = longitude
