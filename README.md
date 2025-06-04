@@ -1,2 +1,1 @@
-# atlas-obscuRa
-Scrape locations of places from Atlas Obscura
+Extremely simple scraper of Atlas Obscura locations for an upcoming trip. Code in `R/obscura-scraper-R`.
